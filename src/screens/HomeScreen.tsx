@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, FlatList } from 'react-native';
+import { StyleSheet, View, Text, FlatList, TouchableOpacity } from 'react-native';
 import PlantCard from '../components/PlantCard';
 import { useNavigation } from '@react-navigation/native';
 
@@ -28,6 +28,14 @@ const HomeScreen = () => {
         keyExtractor={(item) => item.id}
         contentContainerStyle={styles.list}
       />
+      <View style={styles.navigationButtons}>
+        <TouchableOpacity onPress={() => navigation.navigate('Category')}>
+          <Text style={styles.buttonText}>Categories</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('Settings')}>
+          <Text style={styles.buttonText}>Settings</Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -45,6 +53,16 @@ const styles = StyleSheet.create({
   },
   list: {
     flexGrow: 1,
+  },
+  navigationButtons: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    paddingBottom: 20,
+  },
+  buttonText: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#6200EE',
   },
 });
 
