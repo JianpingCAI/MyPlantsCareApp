@@ -135,18 +135,17 @@ By following this design document and development plan, the Home Plants Care mob
 
 # Project Environment and Tech Stack Setup
 
-Install Node.js from https://nodejs.org/
+Install Node.js from <https://nodejs.org/>
 Install the Expo CLI by running: npm install -g expo-cli
-Install Android Studio from https://developer.android.com/studio
+Install Android Studio from <https://developer.android.com/studio>
 Set up an Android device or emulator for testing
-
 
 To set up the project environment and tech stack for the Home Plants Care mobile app, follow these steps:
 
 1. Install Node.js: Ensure that Node.js is installed on your development machine. You can download the latest version of Node.js from the official website: <https://nodejs.org/>
 
 2. Install React Native CLI: The React Native CLI is a command-line tool to create and manage React Native projects. To install it globally, run the following command:
-Follow the official React Native documentation to set up the development environment: https://reactnative.dev/docs/environment-setup
+Follow the official React Native documentation to set up the development environment: <https://reactnative.dev/docs/environment-setup>
 
 Two ways
 
@@ -156,7 +155,7 @@ Two ways
 npx create-expo-app myPlantCareApp
 ```
 
-- React Native CLI 
+- React Native CLI
 
 ```bash
 npm install -g react-native-cli
@@ -167,6 +166,7 @@ npm install -g react-native-cli
  ERROR  [Reanimated] Mismatch between JavaScript part and native part of Reanimated (2.17.0 vs. 2.14.4). Did you forget to re-build the app after upgrading react-native-reanimated? If you use Expo Go, you must downgrade to 2.14.4 which is bundled into Expo SDK.
 
 ### Solution
+
 This error occurs when there is a mismatch between the JavaScript and native parts of the Reanimated library. Since you're using Expo, you need to use the version of react-native-reanimated that is compatible with your Expo SDK version.
 
 To fix this issue, you can downgrade react-native-reanimated to version 2.14.4, which is compatible with Expo SDK 42:
@@ -189,8 +189,7 @@ After downgrading the library, the error should be resolved. If you still experi
 expo start --clear
 ```
 
-If you want to use a newer version of Reanimated, you will need to upgrade your Expo SDK to a version that supports the desired Reanimated version. You can find the upgrade guide in the Expo documentation: https://docs.expo.dev/workflow/upgrading-expo-sdk-walkthrough/
-
+If you want to use a newer version of Reanimated, you will need to upgrade your Expo SDK to a version that supports the desired Reanimated version. You can find the upgrade guide in the Expo documentation: <https://docs.expo.dev/workflow/upgrading-expo-sdk-walkthrough/>
 
 3. Create a new React Native project with TypeScript template:
 
@@ -270,6 +269,10 @@ To install the required dependencies, run the following command:
 npm install @react-navigation/native @react-navigation/stack react-native-reanimated react-native-gesture-handler react-native-screens react-native-safe-area-context @react-native-masked-view/masked-view redux react-redux redux-thunk @types/react-redux axios firebase
 ```
 
+```bash
+npm install react-native-push-notification
+```
+
 These dependencies help build the core functionality of the mobile app, streamlining the development process and ensuring a robust and well-structured application.
 
 ## Separate Frontend and Backend
@@ -301,3 +304,170 @@ Deployment of such a solution typically involves the following steps:
 6. Monitoring and Analytics: Set up monitoring and analytics tools (e.g., Google Analytics for Firebase) to track the app's performance, user behavior, and other metrics to help you improve the app over time.
 
 7. Continuous Integration and Continuous Deployment (CI/CD): Establish a CI/CD pipeline to automate the build, test, and deployment processes for the frontend and backend components, ensuring a streamlined and efficient workflow for future updates and improvements.
+
+# Frontend Components and Screens, Services
+
+In this step, we'll design and implement the frontend components and screens for the Home Plants Care mobile app. We'll focus on the following screens:
+
+1. Login
+2. Signup
+3. Plant List
+4. Plant Details
+5. Add/Edit Plant
+6. Settings
+7. Notifications
+
+## Screens & Components
+
+### Login and Signup screens
+
+Create two components for Login and Signup screens in the `src/screens` folder. These screens will be responsible for handling user authentication using Firebase Authentication.
+
+- src/screens/Login.tsx
+- src/screens/Signup.tsx
+
+### Plant List screen
+
+Create a Plant List screen component in the `src/screens` folder. This screen will display a list of plants with their images, names, and watering reminders.
+
+- src/screens/PlantList.tsx
+
+Also, create a Plant Card component in the `src/components` folder, which will be used to display individual plants in the Plant List screen.
+
+- src/components/PlantCard.tsx
+
+### Plant Details screen
+
+Create a Plant Details screen component in the `src/screens` folder. This screen will display detailed information about a specific plant, including its image gallery, watering reminders, and daily care tips.
+
+- src/screens/PlantDetails.tsx
+
+Additionally, create a Plant Image Gallery component in the `src/components` folder. This component will display a grid of plant images.
+
+- src/components/PlantImageGallery.tsx
+
+### Add/Edit Plant screen
+
+Create an Add/Edit Plant screen component in the `src/screens` folder. This screen will be used to add new plants or edit existing plant information.
+
+- src/screens/AddEditPlant.tsx
+
+### Settings screen
+
+Create a Settings screen component in the `src/screens` folder. This screen will allow users to change their account information and app preferences.
+
+- src/screens/Settings.tsx
+
+### Notifications screen
+
+Create a Notifications screen component in the `src/screens` folder. This screen will display a list of notifications related to watering reminders and daily care tips.
+
+- src/screens/Notifications.tsx
+
+### Navigation
+
+Now, set up the navigation structure for the app using React Navigation. In the `src` folder, create a `navigation` folder with a file called `AppNavigator.tsx`. In this file, import the necessary components and create a stack navigator with the screens you have created:
+
+```javascript
+import React from 'react';
+import { createStackNavigator } from '@react-navigation/stack';
+import Login from '../screens/Login';
+import Signup from '../screens/Signup';
+import PlantList from '../screens/PlantList';
+import PlantDetails from '../screens/PlantDetails';
+import AddEditPlant from '../screens/AddEditPlant';
+import Settings from '../screens/Settings';
+import Notifications from '../screens/Notifications';
+
+const Stack = createStackNavigator();
+
+const AppNavigator = () => {
+  return (
+    <Stack.Navigator initialRouteName="Login">
+      <Stack.Screen name="Login" component={Login} />
+      <Stack.Screen name="Signup" component={Signup} />
+      <Stack.Screen name="PlantList" component={PlantList} />
+      <Stack.Screen name="PlantDetails" component={PlantDetails} />
+      <Stack.Screen name="AddEditPlant" component={AddEditPlant} />
+      <Stack.Screen name="Settings" component={Settings} />
+      <Stack.Screen name="Notifications" component={Notifications} />
+    </Stack.Navigator>
+  );
+};
+
+export default AppNavigator;
+```
+
+Finally, update the `App.tsx` file to include the `AppNavigator` component:
+
+```javascript
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import AppNavigator from './src/navigation/AppNavigator';
+
+const App = () => {
+  return (
+    <NavigationContainer>
+      <AppNavigator />
+    </NavigationContainer>
+  );
+};
+
+export default App;
+```
+
+Now that you have implemented the frontend components and screens, you can start building the functionality and connecting these screens with the backend services.
+
+For each screen, implement the UI using React Native components such as `View`, `Text`, `TextInput`, `Image`, `TouchableOpacity`, and others. Utilize the `StyleSheet` component from React Native to style each screen and component.
+
+## Services
+
+Next, create a `services` folder in the `src` directory. This folder will contain the services required to interact with the backend, such as the API services for plants, categories, and notifications, as well as the authentication service for user login and signup.
+
+- src/services/Authentication.ts
+- src/services/PlantAPI.ts
+- src/services/CategoryAPI.ts
+- src/services/NotificationAPI.ts
+- src/services/WateringRemindersAPI.ts
+
+Implement the required functions in these service files using the `axios` library to make API calls to the backend.
+
+To manage the app state, set up the Redux store, actions, and reducers. Create a `store` folder in the `src` directory, and inside it create three subfolders: `actions`, `reducers`, and `types`. These folders will contain the necessary Redux files for managing the app state.
+
+- src/store/actions/plants.ts
+- src/store/actions/categories.ts
+- src/store/actions/notifications.ts
+- src/store/reducers/plants.ts
+- src/store/reducers/categories.ts
+- src/store/reducers/notifications.ts
+- src/store/types/index.ts
+
+Implement the actions and reducers for each app feature (plants, categories, and notifications) and define the types for each action and state object in the `types` folder.
+
+Finally, integrate the Redux store with the React Native app by wrapping the `App` component with the `Provider` component from `react-redux`. Update the `App.tsx` file as follows:
+
+```javascript
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStore, applyMiddleware } from 'redux';
+import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
+import rootReducer from './src/store/reducers';
+import AppNavigator from './src/navigation/AppNavigator';
+
+const store = createStore(rootReducer, applyMiddleware(thunk));
+
+const App = () => {
+  return (
+    <Provider store={store}>
+      <NavigationContainer>
+        <AppNavigator />
+      </NavigationContainer>
+    </Provider>
+  );
+};
+
+export default App;
+```
+
+With these steps, you have designed and implemented the frontend components and screens for the Home Plants Care mobile app. You can now proceed to the next steps in the development plan, such as developing the backend API and integrating it with the frontend services.
