@@ -1,15 +1,20 @@
-import React, { useEffect } from 'react';
-import { View, Text, FlatList, StyleSheet } from 'react-native';
-import { useDispatch, useSelector } from 'react-redux';
-import { fetchPlants } from '../store/actions/plants';
-import PlantCard from '../components/PlantCard';
+import React, { useEffect } from "react";
+import { View, Text, FlatList, StyleSheet } from "react-native";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchPlants } from "../store/actions/plants";
+import PlantCard from "../components/PlantCard";
 
 const PlantList = ({ navigation }) => {
   const dispatch = useDispatch();
   const plants = useSelector((state) => state.plants);
 
+  // useEffect(() => {
+  //   dispatch(fetchPlants());
+  // }, [dispatch]);
   useEffect(() => {
-    dispatch(fetchPlants());
+    dispatch(fetchPlants()).catch((error) => {
+      setError(error.message);
+    });
   }, [dispatch]);
 
   return (
@@ -20,7 +25,9 @@ const PlantList = ({ navigation }) => {
         renderItem={({ item }) => (
           <PlantCard
             plant={item}
-            onPress={() => navigation.navigate('PlantDetails', { plantId: item.id })}
+            onPress={() =>
+              navigation.navigate("PlantDetails", { plantId: item.id })
+            }
           />
         )}
         keyExtractor={(item) => item.id}

@@ -8,7 +8,7 @@ const Login = ({ navigation }) => {
 
   const handleLogin = async () => {
     try {
-      // await loginUser(email, password);
+      await loginUser(email, password);
       navigation.navigate('PlantList');
     } catch (error) {
       console.error('Error during login:', error);
