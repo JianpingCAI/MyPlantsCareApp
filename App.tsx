@@ -3,11 +3,14 @@ import { NavigationContainer } from "@react-navigation/native";
 import AppNavigator from "./src/navigation/AppNavigator";
 
 import { Provider } from "react-redux";
-// import store from "./src/redux/store";
-import thunk from 'redux-thunk';
-import { createStore, applyMiddleware } from 'redux';
-import rootReducer from './src/store/reducers';
-const store = createStore(rootReducer, applyMiddleware(thunk));
+import { configureStore } from "@reduxjs/toolkit";
+import rootReducer from "./src/store/reducers";
+import thunk from "redux-thunk";
+
+const store = configureStore({
+  reducer: rootReducer,
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(thunk),
+});
 
 export default function App() {
   return (
@@ -18,17 +21,3 @@ export default function App() {
     </Provider>
   );
 }
-
-// import React from 'react';
-// import { NavigationContainer } from '@react-navigation/native';
-// import AppNavigator from './src/navigation/AppNavigator';
-
-// const App = () => {
-//   return (
-//     <NavigationContainer>
-//       <AppNavigator />
-//     </NavigationContainer>
-//   );
-// };
-
-// export default App;
