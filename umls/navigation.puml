@@ -1,0 +1,23 @@
+@startuml
+!define AWSPUML https://raw.githubusercontent.com/awslabs/aws-icons-for-plantuml/v15.0.0/Legacy.2020
+
+actor User
+
+User --> (Login) : Log in
+User --> (Signup) : Sign up
+
+(Login) --> (PlantList) : Successful Login
+(Signup) --> (PlantList) : Successful Signup
+
+(PlantList) --> (AddEditPlant) : Add Plant
+(PlantList) --> (PlantDetails) : View Plant
+(PlantList) --> (Settings) : Open Settings
+(PlantList) --> (Notifications) : Open Notifications
+
+(AddEditPlant) --> (PlantList) : Save Plant
+(PlantDetails) --> (PlantList) : Back to List
+(PlantDetails) --> (AddEditPlant) : Edit Plant
+(Settings) --> (PlantList) : Save Changes
+(Notifications) --> (PlantList) : Close Notifications
+
+@enduml

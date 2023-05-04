@@ -1,13 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   View,
   Text,
   TextInput,
   TouchableOpacity,
   StyleSheet,
+  Alert,
 } from "react-native";
 import { useDispatch } from "react-redux";
 import { addPlant, updatePlant } from "../store/actions/plants";
+import { Ionicons } from "@expo/vector-icons";
 
 const AddEditPlant = ({ route, navigation }) => {
   const isEditMode = route.params?.plant;
@@ -15,16 +17,43 @@ const AddEditPlant = ({ route, navigation }) => {
   const [category, setCategory] = useState(
     isEditMode ? route.params.plant.category : ""
   );
+  const [error, setError] = useState(null);
 
   const dispatch = useDispatch();
 
-  const handleSave = () => {
-    if (isEditMode) {
-      dispatch(updatePlant(route.params.plant.id, { name, category }));
-    } else {
-      dispatch(addPlant({ name, category }));
+  useEffect(() => {
+    if (error) {
+      Alert.alert("An error occurred", error, [{ text: "OK" }]);
     }
-    navigation.goBack();
+  }, [error]);
+
+  React.useLayoutEffect(() => {
+    navigation.setOptions({
+      headerLeft: () => (
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <Ionicons name="md-arrow-back" size={24} color="black" style={styles.backIcon} />
+        </TouchableOpacity>
+      ),
+    });
+  }, [navigation]);
+
+  const handleSave = async () => {
+    if (!name || !category) {
+      setError("Please fill in all fields.");
+      return;
+    }
+
+    try {
+      if (isEditMode) {
+        await dispatch(updatePlant(route.params.plant.id, { name, category }));
+        navigation.navigate("PlantDetails", { plantId: route.params.plant.id });
+      } else {
+        await dispatch(addPlant({ name, category }));
+        navigation.navigate("PlantList");
+      }
+    } catch (err) {
+      setError(err.message);
+    }
   };
 
   return (
@@ -78,6 +107,9 @@ const styles = StyleSheet.create({
   buttonText: {
     color: "#fff",
     textAlign: "center",
+  },
+  backIcon: {
+    marginLeft: 10,
   },
 });
 

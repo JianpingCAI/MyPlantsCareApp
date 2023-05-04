@@ -307,6 +307,45 @@ Deployment of such a solution typically involves the following steps:
 
 # Frontend Components and Screens, Services
 
+## Project Folder Structure
+
+- src
+  - components
+    - CategoryCard.tsx
+    - PlantCard.tsx
+    - WateringReminderCard.tsx
+    - PlantImageGallery.tsx
+  - navigation
+    - AppNavigator.tsx
+  - screens
+    - AddEditPlant.tsx
+    - Login.tsx
+    - Signup.tsx
+    - PlantList.tsx
+    - PlantDetails.tsx
+    - Settings.tsx
+    - Notifications.tsx
+  - services
+    - Authentication.ts
+    - PlantAPI.ts
+    - CategoryAPI.ts
+    - Notifications.ts
+    - WateringReminders.ts
+  - store
+    - actions
+      - categories.ts
+      - notifications.ts
+      - plants.ts
+    - reducers
+      - categories.ts
+      - index.ts
+      - notifications.ts
+      - plants.ts
+    - types
+      - index.ts
+  - App.tsx
+
+
 In this step, we'll design and implement the frontend components and screens for the Home Plants Care mobile app. We'll focus on the following screens:
 
 1. Login
