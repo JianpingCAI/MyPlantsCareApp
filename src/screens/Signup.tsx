@@ -1,11 +1,17 @@
-import React, { useState } from 'react';
-import { View, Text, TextInput, TouchableOpacity, StyleSheet } from 'react-native';
-import { createUser } from '../services/Authentication';
+import React, { useState } from "react";
+import {
+  View,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  StyleSheet,
+} from "react-native";
+import { createUser } from "../services/Authentication";
 
 const Signup = ({ navigation }) => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   const handleSignup = async () => {
     if (password !== confirmPassword) {
@@ -15,9 +21,9 @@ const Signup = ({ navigation }) => {
 
     try {
       await createUser(email, password);
-      navigation.navigate('PlantList');
+      navigation.navigate("PlantList");
     } catch (error) {
-      console.error('Error during signup:', error);
+      console.error("Error during signup:", error);
     }
   };
 
@@ -47,46 +53,46 @@ const Signup = ({ navigation }) => {
       />
       <TouchableOpacity style={styles.button} onPress={handleSignup}>
         <Text style={styles.buttonText}>Sign up</Text>
-</TouchableOpacity>
-<TouchableOpacity onPress={() => navigation.navigate('Login')}>
-<Text style={styles.signupText}>Already have an account? Login</Text>
-</TouchableOpacity>
-</View>
-);
+      </TouchableOpacity>
+      <TouchableOpacity onPress={() => navigation.navigate("Login")}>
+        <Text style={styles.signupText}>Already have an account? Login</Text>
+      </TouchableOpacity>
+    </View>
+  );
 };
 
 const styles = StyleSheet.create({
-container: {
-flex: 1,
-justifyContent: 'center',
-paddingHorizontal: 20,
-},
-title: {
-fontSize: 24,
-marginBottom: 20,
-textAlign: 'center',
-},
-input: {
-borderWidth: 1,
-borderColor: '#ccc',
-borderRadius: 5,
-padding: 10,
-marginBottom: 15,
-},
-button: {
-backgroundColor: '#1E90FF',
-borderRadius: 5,
-padding: 12,
-marginBottom: 15,
-},
-buttonText: {
-color: '#fff',
-textAlign: 'center',
-},
-signupText: {
-textAlign: 'center',
-color: '#666',
-},
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    paddingHorizontal: 20,
+  },
+  title: {
+    fontSize: 24,
+    marginBottom: 20,
+    textAlign: "center",
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: "#ccc",
+    borderRadius: 5,
+    padding: 10,
+    marginBottom: 15,
+  },
+  button: {
+    backgroundColor: "#1E90FF",
+    borderRadius: 5,
+    padding: 12,
+    marginBottom: 15,
+  },
+  buttonText: {
+    color: "#fff",
+    textAlign: "center",
+  },
+  signupText: {
+    textAlign: "center",
+    color: "#666",
+  },
 });
 
 export default Signup;

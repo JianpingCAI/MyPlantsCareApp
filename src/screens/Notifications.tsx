@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, FlatList } from 'react-native';
-import { useSelector, useDispatch } from 'react-redux';
-import { fetchWateringReminders } from '../services/WateringRemindersAPI';
-import { RootState } from '../store/reducers';
-import { Plant } from '../store/types';
-import PlantCard from '../components/PlantCard';
+import React, { useEffect, useState } from "react";
+import { View, Text, StyleSheet, FlatList } from "react-native";
+import { useSelector, useDispatch } from "react-redux";
+import { fetchWateringReminders } from "../services/WateringReminders";
+import { RootState } from "../store/reducers";
+import { Plant } from "../store/types";
+import PlantCard from "../components/PlantCard";
 
 const Notifications = () => {
   const [loading, setLoading] = useState(false);
@@ -44,11 +44,11 @@ const Notifications = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#f5f5f5',
+    backgroundColor: "#f5f5f5",
   },
   title: {
     fontSize: 24,
-    textAlign: 'center',
+    textAlign: "center",
     marginVertical: 20,
   },
   list: {

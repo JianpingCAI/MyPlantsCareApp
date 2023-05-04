@@ -63,40 +63,40 @@ const MOCK_PLANTS: Plant[] = [
 
 export const addPlant =
   (plant: Plant): ThunkAction<void, RootState, unknown, Action<string>> =>
-  async (dispatch) => {
-    // In a real-world app, this should call an API to save the new plant.
-    dispatch({
-      type: ADD_PLANT,
-      plant,
-    });
-  };
+    async (dispatch) => {
+      // In a real-world app, this should call an API to save the new plant.
+      dispatch({
+        type: ADD_PLANT,
+        plant,
+      });
+    };
 
 export const updatePlant =
   (
     id: string,
     updates: Partial<Plant>
   ): ThunkAction<void, RootState, unknown, Action<string>> =>
-  async (dispatch) => {
-    // In a real-world app, this should call an API to update the plant.
-    dispatch({
-      type: UPDATE_PLANT,
-      id,
-      updates,
-    });
-  };
+    async (dispatch) => {
+      // In a real-world app, this should call an API to update the plant.
+      dispatch({
+        type: UPDATE_PLANT,
+        id,
+        updates,
+      });
+    };
 
 export const fetchPlants_origin =
   (): ThunkAction<void, RootState, unknown, Action<string>> =>
-  async (dispatch) => {
-    // In a real-world app, this should call an API to fetch the plants.
-    const plants: Plant[] = [
-      // Add mock data
-    ];
-    dispatch({
-      type: SET_PLANTS,
-      plants,
-    });
-  };
+    async (dispatch) => {
+      // In a real-world app, this should call an API to fetch the plants.
+      const plants: Plant[] = [
+        // Add mock data
+      ];
+      dispatch({
+        type: SET_PLANTS,
+        plants,
+      });
+    };
 
 const setPlants = (plants: Plant[]) => ({
   type: SET_PLANTS,
@@ -105,21 +105,21 @@ const setPlants = (plants: Plant[]) => ({
 
 export const fetchPlants =
   (): ThunkAction<void, RootState, unknown, Action<string>> =>
-  async (dispatch) => {
-    // Replace the following line with a call to the API in a real-world app
-    dispatch(setPlants(MOCK_PLANTS));
-  };
+    async (dispatch) => {
+      // Replace the following line with a call to the API in a real-world app
+      dispatch(setPlants(MOCK_PLANTS));
+    };
 
 export const fetchPlantById_origin =
   (id: string): ThunkAction<void, RootState, unknown, Action<string>> =>
-  async (dispatch) => {
-    // In a real-world app, this should call an API to fetch the plant by ID.
-    const plant: Plant | null = null;
-    dispatch({
-      type: GET_PLANT,
-      plant: plant ? [plant] : [],
-    });
-  };
+    async (dispatch) => {
+      // In a real-world app, this should call an API to fetch the plant by ID.
+      const plant: Plant | null = null;
+      dispatch({
+        type: GET_PLANT,
+        plant: plant ? [plant] : [],
+      });
+    };
 
 export const setPlant = (plant: Plant | null | undefined) => ({
   type: GET_PLANT,
@@ -128,7 +128,7 @@ export const setPlant = (plant: Plant | null | undefined) => ({
 
 export const fetchPlantById =
   (id: string): ThunkAction<void, RootState, unknown, Action<string>> =>
-  async (dispatch) => {
-    // Replace the following line with a call to the API in a real-world app
-    dispatch(setPlant(MOCK_PLANTS.find((plant) => plant.id === id)));
-  };
+    async (dispatch) => {
+      // Replace the following line with a call to the API in a real-world app
+      dispatch(setPlant(MOCK_PLANTS.find((plant) => plant.id === id)));
+    };

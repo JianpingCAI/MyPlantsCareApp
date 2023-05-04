@@ -1,40 +1,5 @@
-// import React from 'react';
-// import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
-
-// interface PlantCardProps {
-//   plantName: string;
-//   onPress: () => void;
-// }
-
-// const PlantCard: React.FC<PlantCardProps> = ({ plantName, onPress }) => {
-//   return (
-//     <TouchableOpacity style={styles.card} onPress={onPress}>
-//       <View>
-//         <Text style={styles.plantName}>{plantName}</Text>
-//       </View>
-//     </TouchableOpacity>
-//   );
-// };
-
-// const styles = StyleSheet.create({
-//   card: {
-//     backgroundColor: '#fff',
-//     borderRadius: 5,
-//     padding: 15,
-//     margin: 10,
-//     alignItems: 'center',
-//     justifyContent: 'center',
-//   },
-//   plantName: {
-//     fontSize: 18,
-//     fontWeight: 'bold',
-//   },
-// });
-
-// export default PlantCard;
-
-import React from 'react';
-import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
+import React from "react";
+import { View, Text, Image, TouchableOpacity, StyleSheet } from "react-native";
 
 const PlantCard = ({ plant, onPress }) => {
   return (
@@ -50,7 +15,7 @@ const PlantCard = ({ plant, onPress }) => {
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row',
+    flexDirection: "row",
     marginBottom: 15,
   },
   image: {
@@ -66,7 +31,7 @@ const styles = StyleSheet.create({
   },
   category: {
     fontSize: 14,
-    color: '#888',
+    color: "#888",
   },
 });
 
